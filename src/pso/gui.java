@@ -72,16 +72,16 @@ public class gui extends JPanel {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.BLACK);
-        g2.drawString("Current   Best   fitness    -- >   " + particle.gbest, 600, 20);
-        String temp="X   -- >   " + particle.gx + "         Y   -- >   " + particle.gy+ "         Z   -- >   " + particle.gz;
-        g2.drawString(temp, 600, 50);
+        g2.drawString("Current   Best   fitness    -- >   " + String.format("%.9f", particle.gbest), 600, 20);
+        String temp="X   -- >   " + String.format("%.9f", particle.gX) + "         Y   -- >   " + String.format("%.9f", particle.gY)+ "         Z   -- >   " +String.format("%.9f", particle.gZ);
+        g2.drawString(temp, 550, 50);
         for (int i = 0; i < swarm.swarmSize; i++) {
             g2.setStroke(new BasicStroke(1));
-            g2.drawLine(swarm.theSwarm[i].x, swarm.theSwarm[i].y, swarm.theSwarm[i].x, swarm.theSwarm[i].y);
+            g2.drawLine((int)swarm.theSwarm[i].X, (int)swarm.theSwarm[i].Y, (int)swarm.theSwarm[i].X,(int) swarm.theSwarm[i].Y);
         }
         g2.setColor(Color.RED);
         g2.setStroke(new BasicStroke(5));
-        g2.drawLine(particle.gx, particle.gy, particle.gx, particle.gy);
+        g2.drawLine((int)particle.gX,(int) particle.gY,(int) particle.gX, (int)particle.gY);
     }
 
     public static void main(String[] args) throws InterruptedException {

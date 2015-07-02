@@ -5,9 +5,9 @@ package pso;
  */
 public class swarm extends Thread {
 
-    public static int swarmSize = 10000;
+    public static int swarmSize = 100;
     public static particle[] theSwarm = new particle[swarmSize];
-    public static int dx = 1000, dy = 400;
+    //public static int dx = 1000, dy = 400;
     public static boolean gb = false, stop = false;
 
     public swarm() {
@@ -21,34 +21,34 @@ public class swarm extends Thread {
     public void run() {
         try {
             //theSwarm = reinitialize(theSwarm);
-            while (particle.gbest > 0 && !stop) {
+            while ( !stop) {
                 for (int j = 0; j < swarmSize; j++) {
-                    int temp = particle.getFitness(theSwarm[j]);
-                    //System.out.println(particle.gx + "   " + particle.gy);
+                    double temp = particle.getFitness(theSwarm[j]);
+                    System.out.println(particle.gbest);
                     if (temp < theSwarm[j].pbest) {
                         theSwarm[j].pbest = temp;
-                        theSwarm[j].px = theSwarm[j].x;
-                        theSwarm[j].py = theSwarm[j].y;
-                        theSwarm[j].pz = theSwarm[j].z;
+                        theSwarm[j].pX = theSwarm[j].X;
+                        theSwarm[j].pY = theSwarm[j].Y;
+                        theSwarm[j].pZ = theSwarm[j].Z;
                     }
                 }
                 for (int j = 0; j < swarmSize; j++) {
-                    int temp = theSwarm[j].pbest;
+                    double temp = theSwarm[j].pbest;
                     if (temp < particle.gbest) {
                         particle.gbest = temp;
-                        particle.gx = theSwarm[j].x;
-                        particle.gy = theSwarm[j].y;
-                        particle.gz = theSwarm[j].z;
+                        particle.gX = theSwarm[j].X;
+                        particle.gY = theSwarm[j].Y;
+                        particle.gZ = theSwarm[j].Z;
                     }
                 }
                 for (int j = 0; j < swarmSize; j++) {
                     theSwarm[j].move();
                 }
                 gui.f.paint(gui.f.getGraphics());
-                Thread.sleep(200);
+                //Thread.sleep(200);
             }
             gui.f.paint(gui.f.getGraphics());
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -71,22 +71,23 @@ public class swarm extends Thread {
     }
 
     public static particle[] reinitialize(particle p[]) {
-        particle.gbest = 1000000000;
-        particle.gx = 0;
-        particle.gy = 0;
-        particle.gz = 0;
+        particle.gbest = 1000000000.0;
+        particle.gX = 0.0;
+        particle.gY = 0.0;
+        particle.gZ = 0.0;
         particle[] ne = new particle[swarmSize];
         initialize(ne);
         for (int j = 0; j < swarm.swarmSize; j++) {
-            ne[j].x = (int) (p[j].x + Math.random() * 20);
-            ne[j].y = (int) (p[j].y + Math.random() * 20);
-            ne[j].z = (int) (p[j].z + Math.random() * 20);
-            ne[j].vx = 0;
-            ne[j].vy = 0;
-            ne[j].vz = 0;
-            ne[j].px = 100000;
-            ne[j].py = 100000;
-            ne[j].pz = 100000;
+            ne[j].X = p[j].X + Math.random() * particle.pmaxX;
+            ne[j].Y = p[j].Y + Math.random() * particle.pmaxY;
+            ne[j].Z = p[j].Z + Math.random() * particle.pmaxZ;
+            ne[j].vX = 0;
+            ne[j].vY = 0;
+            ne[j].vZ = 0;
+            ne[j].pX = 100000;
+            ne[j].pY = 100000;
+            ne[j].pZ = 100000;
+            ne[j].pbest=10000000000.0;
         }
         return ne;
     }
