@@ -9,7 +9,7 @@
     </properties>
     <border type="none"/>
     <children>
-      <component id="b1203" class="javax.swing.JTextField" binding="enterEquationTextField" default-binding="true">
+      <component id="b1203" class="javax.swing.JTextField" binding="TextField">
         <constraints>
           <grid row="2" column="1" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="303" height="24"/>
@@ -17,7 +17,9 @@
           <gridbag weightx="1.0" weighty="1.0" ipady="15"/>
         </constraints>
         <properties>
-          <text value=""/>
+          <font name="Segoe UI" size="13"/>
+          <text value="pow( x ,2)+pow( y ,2)+pow( z ,2)"/>
+          <toolTipText value="Click on the Help button to understand the input equation format"/>
         </properties>
       </component>
       <component id="f23cf" class="javax.swing.JLabel" binding="label">

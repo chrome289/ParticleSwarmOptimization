@@ -1,15 +1,17 @@
 package pso;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 /**
  * Created by Siddharth on 30-06-2015.
  */
 public class swarm extends Thread {
     public static int noOfDimensions;
-    public static int swarmSize = 1000;
+    public static int swarmSize = 2000;
     public static particle[] theSwarm = new particle[swarmSize];
     public static boolean stop = false;
+    public static ArrayList<Character>variable=new ArrayList<Character>();
 
     public swarm() {
     }
@@ -17,13 +19,16 @@ public class swarm extends Thread {
     public static void pso(int n) throws InterruptedException {
         noOfDimensions = n;
         for (int i = 0; i < noOfDimensions; i++) {
-            double option = JOptionPane.showOptionDialog(null, new JSpinner(), "Enter Max for Dimension " + (i + 1), JOptionPane.CLOSED_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+            JSpinner spinner2 = new JSpinner();
+            spinner2.setValue(new Double(5.0));
+            double option = JOptionPane.showOptionDialog(null, spinner2, "Enter Max for Dimension " + (i + 1), JOptionPane.CLOSED_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
             if (option == JOptionPane.OK_OPTION) {
-                particle.pmaxX.add(option);
+                particle.pmaxX.add(Double.parseDouble(String.valueOf(spinner2.getValue())));
             }
-            option = JOptionPane.showOptionDialog(null, new JSpinner(), "Enter Min for Dimension " + (i + 1), JOptionPane.CLOSED_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+            spinner2.setValue(new Double(-5.0));
+            option = JOptionPane.showOptionDialog(null, spinner2, "Enter Min for Dimension " + (i + 1), JOptionPane.CLOSED_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
             if (option == JOptionPane.OK_OPTION) {
-                particle.pminX.add(option);
+                particle.pminX.add(Double.parseDouble(String.valueOf(spinner2.getValue())));
             }
             particle.gX.add(0.0);
             particle.vmaxX.add(1.0);
@@ -36,8 +41,8 @@ public class swarm extends Thread {
             //theSwarm = reinitialize(theSwarm);
             while (!stop) {
                 for (int j = 0; j < swarmSize; j++) {
-                    double temp = particle.getFitness(theSwarm[j]);
-                    // System.out.println(particle.gbest);
+                    double temp = parser.getFitness(gui.equation,theSwarm[j]);
+                     System.out.println(particle.gbest);
                     if (temp < theSwarm[j].pbest) {
                         theSwarm[j].pbest = temp;
                         for (int i = 0; i < noOfDimensions; i++)
@@ -96,4 +101,5 @@ public class swarm extends Thread {
         }
         return ne;
     }
+
 }

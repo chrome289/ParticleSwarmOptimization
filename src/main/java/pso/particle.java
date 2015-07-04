@@ -59,7 +59,7 @@ public class particle {
         }
     }
 
-    public static double getFitness(particle p) {
+    /*public static double getFitness(particle p) {
         //ackley function           //Damn you Java and your floating point arithmetic
         /*double sumX=Math.pow(p.X,2)+Math.pow(p.Y,2)+Math.pow(p.Z,2);
         double cosX=Math.cos(2*Math.PI*p.X)+Math.cos(2*Math.PI*p.Y)+Math.cos(2*Math.PI*p.Z);
@@ -73,10 +73,10 @@ public class particle {
         return t;*/
 
         //Rosenbrock function
-        double t=(100*(Math.pow(p.X.get(1)-Math.pow(p.X.get(0),2),2)))+Math.pow(p.X.get(0)-1,2);
+        /*double t=(100*(Math.pow(p.X.get(1)-Math.pow(p.X.get(0),2),2)))+Math.pow(p.X.get(0)-1,2);
         t=t+(100*(Math.pow(p.X.get(2)-Math.pow(p.X.get(1),2),2)))+Math.pow(p.X.get(1)-1,2);
         //System.out.println("@"+t);
-        return t;
+        return t;*/
 
         //Box Betts function
         /*double t = 0.0;
@@ -93,6 +93,7 @@ public class particle {
         double temp3 = Math.pow(p.Z, 4) - (16 * Math.pow(p.Z, 2)) + (5 * p.Z);
         double t = temp1 + temp2 + temp3;
         t = t * 0.5;
-        return t;*/
-    }
+        return t;
+        return new parser().fitness(gui.equation);
+    }*/
 }
